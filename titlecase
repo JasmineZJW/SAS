@@ -1,11 +1,12 @@
 /************************************************************************************************
  *  A macro to check title case when adding variables/values into SDTM/ADaM datasets            *
- *
- *
- *
- *
+ *  Parameters:                                                                                 *
+ *              indt_  : specify the input dataset which includes labels to be checked.         *
+ *              invar_ : specify the variable name that store the label.                        *
+ *              outdt_ : specify the name of output dataset.                                    *
+ *              excl   : specify the articles, prepositions, 
+                         and conjunctions that need to exclude from title case.                 *
  ************************************************************************************************/
-
 
 
 %macro titlecase(indt_=
