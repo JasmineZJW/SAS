@@ -8,10 +8,8 @@
                          and conjunctions that need to exclude from title case.                 *
  ************************************************************************************************/
 
-
 %macro titlecase(indt_=
                , invar_=
-               , outdt_=
                , excl=);
   data &outdt_.;
       set &indt_.;
