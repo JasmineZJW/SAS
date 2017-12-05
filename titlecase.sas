@@ -8,8 +8,10 @@
                          and conjunctions that need to exclude from title case.                 *
  ************************************************************************************************/
 
+
 %macro titlecase(indt_=
                , invar_=
+               , outdt_=
                , excl=);
   data &outdt_.;
       set &indt_.;
@@ -17,7 +19,7 @@
       LABEL = &invar_.;
       /* Upcase the first character of each word */
       START = 1;
-      STOP  =length(&invar_.);
+      STOP  =length(LABEL);
       REUC  = prxparse("/\b\w/");
       call prxnext (REUC, START, STOP, LABEL, POS, LENGTH);
       do while (POS > 0);
