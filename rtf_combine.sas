@@ -14,7 +14,7 @@
    keepdocx： Indicate whether to keep the combined docx file(s)  
             * Y=keep the combined docx file(s)
             * N=remove the docx file(s)                         *
-* 2017-12-13： Update to read the front type from source rtf.    *
+* 2017-12-13： Update to read the font type from source rtf.    *
 *****************************************************************/
 
 %macro rtf_combine(path    = 
