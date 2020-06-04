@@ -27,7 +27,7 @@ proc groovy classpath="U:\test\pdfbox-app-2.0.19.jar";
 	public class Pagepane {
 	   
 		public static void main(String... args) throws IOException {
-			File file = new File("U:/test/4-02-crf-annotated.pdf");
+			File file = new File("U:/test/test.pdf");
 	        PDDocument document = PDDocument.load(file);
 			        int pageNum = 0;
 					String Rect = "";
