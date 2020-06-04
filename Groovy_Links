@@ -1,0 +1,63 @@
+proc groovy classpath="U:\test\pdfbox-app-2.0.19.jar";
+	add classpath="U:\test\debugger-app-2.0.19.jar";
+	submit;
+	package org.apache.pdfbox.debugger.PagePane;
+	import java.awt.Color;
+	import java.awt.Component;
+	import java.awt.Font;
+	import java.awt.GraphicsEnvironment;
+	import org.apache.pdfbox.pdmodel.PDDocument;
+	import org.apache.pdfbox.pdmodel.PDPage;
+	import org.apache.pdfbox.rendering.PDFRenderer;
+	import org.apache.pdfbox.debugger.PDFDebugger;
+	import org.apache.pdfbox.pdmodel.common.PDRectangle;
+	import org.apache.pdfbox.pdmodel.interactive.action.PDAction;
+	import org.apache.pdfbox.pdmodel.interactive.action.PDActionGoTo;
+	import org.apache.pdfbox.pdmodel.interactive.action.PDActionURI;
+	import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotation;
+	import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationLink;
+	import org.apache.pdfbox.pdmodel.interactive.annotation.PDAnnotationWidget;
+	import org.apache.pdfbox.pdmodel.interactive.documentnavigation.destination.PDDestination;
+	import org.apache.pdfbox.pdmodel.interactive.documentnavigation.destination.PDNamedDestination;
+	import org.apache.pdfbox.pdmodel.interactive.documentnavigation.destination.PDPageDestination;
+	import org.apache.pdfbox.pdmodel.interactive.form.PDAcroForm;
+	import org.apache.pdfbox.pdmodel.interactive.form.PDField;
+	import org.apache.pdfbox.text.PDFTextStripperByArea;
+
+	public class Pagepane {
+	   
+		public static void main(String... args) throws IOException {
+			File file = new File("U:/test/4-02-crf-annotated.pdf");
+	        PDDocument document = PDDocument.load(file);
+			        int pageNum = 0;
+					String Rect = "";
+					FileWriter myWriter = new FileWriter("U:/test/test.txt");
+	                BufferedWriter bw = new BufferedWriter(myWriter);
+	                PrintWriter out = new PrintWriter(bw);
+	                for( PDPage page : document.getPages() )
+	                {
+	                    pageNum++;
+						PDFTextStripperByArea stripper = new PDFTextStripperByArea();
+	                    List<PDAnnotation> annotations = page.getAnnotations();
+						for( int j=0; j<annotations.size(); j++ )
+	                      {
+	                        PDAnnotation annot = annotations.get(j);
+							String field=PDField;
+							if( annot instanceof PDAnnotationLink )
+							   {
+	                            PDAnnotationLink link = (PDAnnotationLink)annot;
+	                            PDRectangle rect = link.getRectangle();
+								float x1 = rect.getLowerLeftX();
+								float y1 = rect.getUpperRightY();
+	                            float x2 = x1 + rect.getWidth();
+	                            float y2 = y1 + rect.getHeight();
+								myWriter.write(pageNum + ", " + x1 + ", " + x2 + ", " + y1 + ", " + y2 + "\r\n");
+	                           }
+	                        }				  
+					}
+			myWriter.close();        
+			document.close();
+		}
+	}   
+	endsubmit;
+quit;
